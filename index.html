@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>業務方法書 ひっかけクイズ</title>
+<style>
+:root{--bg:#f6f3ee;--fg:#1d2a2a;--card:#fff;--ac:#1f5f5b;--on:#fff;--ng:#b3261e;--ok:#1f7a45;--mu:#6b7573;--bd:#d8d2c8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a19;--fg:#e8ecea;--card:#1d2624;--ac:#4fb3a9;--on:#0b1412;--ng:#f2877f;--ok:#5ac08a;--mu:#9aa8a5;--bd:#33403d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141a19;--fg:#e8ecea;--card:#1d2624;--ac:#4fb3a9;--on:#0b1412;--ng:#f2877f;--ok:#5ac08a;--mu:#9aa8a5;--bd:#33403d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 "Hiragino Sans","Noto Sans JP",system-ui,sans-serif}
+main{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:8px 0 4px}
+.sub,.tag{color:var(--mu);font-size:14px;margin:4px 0}
+button{font:inherit;color:inherit;border:1px solid var(--bd);background:var(--card);border-radius:10px;padding:12px 14px;text-align:left;width:100%;margin:6px 0;cursor:pointer}
+button:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.pri{background:var(--ac);color:var(--on);border-color:var(--ac);text-align:center;font-weight:700}
+.bar{height:6px;background:var(--bd);border-radius:3px}
+.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
+.q{font-weight:700;margin:12px 0 4px}
+.opt.ok{border-color:var(--ok);box-shadow:inset 4px 0 var(--ok)}
+.opt.ng{border-color:var(--ng);box-shadow:inset 4px 0 var(--ng)}
+.fb{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin:10px 0}
+</style></head>
+<body><main id="app"></main>
+<script>
+const TP=["業務の種類","代理の相手","代理・媒介・法律","預金・定期積金","貸付け・限度","利率・方法"];
+const N={"保険の引受け":"保険は「募集」のみ","不動産の仲介":"どこにも無い","不動産の売買":"どこにも無い"};
+const F=[];
+const add=(t,s,a,w)=>F.push({t,s,a,w});
+const sets=(t,s,A,W)=>A.forEach(a=>F.push({t,s,a,w:W,set:1}));
+sets(0,"「業務の種類」に「{v}」が含まれる",["預金及び定期積金の受入れ","資金の貸付け及び手形の割引","為替取引","債務の保証","手形の引受け","有価証券の貸付け","国債証券等の引受け","金銭債権の取得又は譲渡","短期社債等の取得又は譲渡","金銭の収納その他金銭に係る事務の取扱い","有価証券・貴金属等の保護預り","振替業","両替","金融等デリバティブ取引","ファイナンス・リース取引の媒介","地域活性化等業務","保険募集","確定拠出年金法による業務","地方債・社債等の募集又は管理の受託","電子債権記録業に係る業務","共済募集","企業価値担保権に関する信託業務"],["保険の引受け","不動産の仲介","不動産の売買","暗号資産の売買","質屋業","株式の引受け"]);
+sets(1,"業務の代理の対象に「{v}」が含まれる",["日本政策金融公庫","住宅金融支援機構","農畜産業振興機構","勤労者退職金共済機構","福祉医療機構","日本銀行","年金積立金管理運用独立行政法人","農林漁業信用基金","中小企業基盤整備機構","日本酒造組合中央会","しんきん保証基金","全国石油協会","地方住宅供給公社","不動産流通推進センター","ベンチャーエンタープライズセンター","新エネルギー・産業技術総合開発機構","情報処理推進機構"],["日本取引所グループ","全国銀行協会","国民生活センター","預金保険機構","日本証券業協会","日本貿易振興機構"]);
+add(2,"保険は{v}を行える","募集(保険業法第275条第1項)",["引受け","引受け及び募集","保険金の査定"]);
+add(2,"投資顧問契約等の締結の代理又は媒介の相手は{v}","大和証券株式会社",["野村證券株式会社","SMBC日興証券株式会社","みずほ証券株式会社"]);
+add(2,"信託会社等の業務の代理又は媒介の相手は三井住友信託銀行と{v}","信金中央金庫",["三菱UFJ信託銀行","農林中央金庫","日本銀行"]);
+add(2,"{v}の業務の代理又は媒介ができる(内閣総理大臣が定めるものに限る)","金庫(信用金庫及び信用金庫連合会)",["銀行","信用組合","労働金庫"]);
+add(2,"企業価値担保権に関する信託業務は{v}により行う","事業性融資の推進等に関する法律",["信託業法","銀行法","金融商品取引法"]);
+add(2,"確定拠出年金法は{v}","平成13年法律第88号",["平成13年法律第26号","平成7年法律第105号","平成19年法律第102号"]);
+add(2,"高齢者居住支援センターの委託業務から{v}は除かれる","債務保証の決定及び求償権の管理回収業務",["申込の受付","保証債務履行時の事務"]);
+add(2,"電子債権記録業に係る業務は{v}の委託を受けて行う","電子債権記録機関",["日本銀行","預金保険機構","登記所"]);
+add(2,"保険募集の根拠は保険業法{v}","第275条第1項",["第275条第2項","第58条第1項","第54条第1項"]);
+add(3,"当座預金は{v}","無利息",["預け入の際の約定による利率","金庫所定の利率"]);
+add(3,"貯蓄預金の権利の譲渡又は質入は{v}","あらかじめ金庫の承認を受けなければならない",["自由にできる","事後に金庫へ届け出ればよい"]);
+add(3,"譲渡性預金は{v}","中途解約及び買取償却は行わない",["中途解約に応じる","金庫が買取償却を行う"]);
+add(3,"譲渡性預金の権利の譲渡は{v}","利息とともにのみ行うことができる",["元本のみ行うことができる","利息と切り離して行うことができる"]);
+add(3,"定期預金でやむを得ず解約する場合は{v}を適用する","金庫所定の利率",["預入時の約定利率","法定利率"]);
+add(3,"定期積金の給付補てん備金の所要額は、受入積金の{v}に利回を乗じた額","積数",["払込総額","残高","払込回数"]);
+add(3,"定期積金の給付契約金は{v}に給付する","契約期間満了の日",["払込開始から1年経過した日","積金者の請求があった日"]);
+add(3,"定期積金の延滞利息の利率は{v}","当該契約の満期給付利回に相当する利率",["年18.25%以内","年15.00%以内"]);
+add(3,"定期積金の権利義務の譲渡又は質入は{v}","定期預金に準ずる",["譲渡性預金に準ずる","当座預金に準ずる"]);
+add(3,"定期積金は預入の際の約定による{v}を定める","利回",["利率"]);
+add(4,"会員以外で会員資格を有する者への貸付けは1人当たり{v}の範囲内","700万円",["500万円","1,000万円","300万円","1,500万円"]);
+add(4,"会員期間{v}の脱退事業者への貸付けは、脱退から10年以内","5年以上",["3年以上","1年以上","10年以上"]);
+add(4,"会員以外の者への貸付けは、その{v}を担保とするものを行える","預金又は定期積金",["不動産","有価証券","売掛金"]);
+add(4,"地方公共団体に対しては{v}を行える","資金の貸付けのみ",["資金の貸付け及び手形の割引"]);
+add(4,"金融機関に対しては{v}を行える","資金の貸付け及び手形の割引",["資金の貸付けのみ","手形の割引のみ"]);
+add(4,"住宅等供給法人は、出資額等の{v}以上が地方公共団体によるもの","2分の1",["3分の1","3分の2","4分の1"]);
+add(4,"同一人への信用の供与等の限度は自己資本額の{v}","100分の25",["100分の20","100分の15","100分の30","100分の50"]);
+add(4,"会員以外への貸付け等の合計は、貸付け等総額の{v}が最高限度","100分の20",["100分の25","100分の10","100分の30"]);
+add(4,"同一人限度の適用除外に、{v}に対する信用の供与がある","国及び地方公共団体",["上場企業","会員","金庫の役員"]);
+add(4,"同一人限度の例外は、銀行法第13条第1項ただし書の{v}の承認を受けたもの","内閣総理大臣",["金融庁長官","日本銀行総裁"]);
+add(5,"貸付けの利率は年{v}以内","15.00%",["18.25%","12.00%","10.00%","20.00%"]);
+add(5,"手形の割引の利率は年{v}以内","15.00%",["18.25%","12.00%","10.00%","20.00%"]);
+add(5,"15%の利率制限は{v}の貸付けには適用しない","返済期限1年以上又は1件100万円以下",["返済期限1年未満","1件100万円超"]);
+add(5,"15%の利率制限は{v}には適用しない","外国通貨建ての貸出",["円建ての貸出","会員への貸出"]);
+add(5,"貸出金の延滞損害金は延滞元金に対し年{v}以内","18.25%",["15.00%","14.60%","20.00%","12.00%"]);
+add(5,"債務の保証の保証料は年{v}以内","4%",["15%","18.25%","8%","2%"]);
+add(5,"有価証券の貸付けの利率は年{v}以内","4%",["15%","18.25%","8%","2%"]);
+add(5,"保護預りの保管方法は披封預り、封緘預り及び{v}","貸渡保護函",["金庫預り","寄託預り"]);
+add(5,"国、地方公共団体、会社等の金銭の収納に係る事務は{v}","当該公共団体等との契約に定めたところによる",["法令等の定めるところによる","金庫が一律に定める"]);
+add(5,"振替業は{v}","法令等の定めるところによる",["契約に定めるところによる","金庫が一律に定める"]);
+add(5,"第2の14〜21号(法律による業務)の方法は{v}","法令等の定めるところによる",["契約に定めるところによる","金庫が定める"]);
+add(5,"両替は依頼者から{v}を徴する","所定の両替手数料",["契約に定める手数料","保証料"]);
+
+const pick=a=>a[Math.random()*a.length|0];
+const sh=a=>a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const tx=(f,v)=>f.s.replace("{v}",v);
+const $=document.getElementById("app");
+let S;
+function mk(f){
+  const v=pick(f.w);
+  const o=sh(F.filter(g=>g.t==f.t&&g!==f)).slice(0,2).map(g=>({s:tx(g,g.a)}));
+  o.push({s:tx(f,v),bad:1,fix:f.set?"「"+v+"」は列挙されていません"+(N[v]?"("+N[v]+")":""):"正:"+tx(f,f.a)});
+  return {f,o:sh(o)};
+}
+function home(){
+  $.innerHTML='<h1>業務方法書 ひっかけクイズ</h1><p class="sub">誤っているものを1つ選ぶ3択です。ひっかけは開始のたびに入れ替わります。</p><button class="pri" data-t="-1">全範囲 10問</button>'+TP.map((n,i)=>'<button data-t="'+i+'">'+n+'</button>').join("");
+  $.onclick=e=>{const b=e.target.closest("button");if(b)start(+b.dataset.t)};
+}
+function start(t,facts){
+  const pool=facts||sh(t<0?F:F.filter(f=>f.t==t)).slice(0,10);
+  S={qs:pool.map(mk),i:0,n:0,miss:[],t};
+  show();
+}
+function show(){
+  const q=S.qs[S.i];
+  if(!q)return res();
+  $.innerHTML='<div class="bar"><i style="width:'+S.i/S.qs.length*100+'%"></i></div><p class="tag">'+(S.i+1)+' / '+S.qs.length+'・'+TP[q.f.t]+'</p><p class="q">誤っているものはどれか</p>'+q.o.map((o,i)=>'<button class="opt" data-i="'+i+'">'+o.s+'</button>').join("")+'<div id="fb"></div>';
+  $.onclick=e=>{const b=e.target.closest(".opt");if(b&&!q.done)ans(q,+b.dataset.i)};
+}
+function ans(q,i){
+  q.done=1;
+  const hit=!!q.o[i].bad;
+  if(hit)S.n++;else S.miss.push(q.f);
+  document.querySelectorAll(".opt").forEach((b,k)=>{
+    const o=q.o[k];
+    if(o.bad)b.classList.add("ok");
+    if(k==i&&!hit)b.classList.add("ng");
+    b.insertAdjacentText("afterbegin",o.bad?"✕ ":"○ ");
+  });
+  document.getElementById("fb").innerHTML='<div class="fb"><b>'+(hit?"正解":"不正解")+'</b><br>'+q.o.find(o=>o.bad).fix+'</div><button class="pri" id="nx">'+(S.i+1<S.qs.length?"次へ":"結果を見る")+'</button>';
+  document.getElementById("nx").onclick=()=>{S.i++;show()};
+}
+function res(){
+  const m=S.miss;
+  $.innerHTML='<h1>'+S.n+' / '+S.qs.length+' 問正解</h1>'+(m.length?'<p class="sub">間違えた問題</p>'+S.qs.filter(q=>m.includes(q.f)).map(q=>{const b=q.o.find(o=>o.bad);return '<div class="fb">✕ '+b.s+'<br>'+b.fix+'</div>'}).join(""):'<p>全問正解です。</p>')+(m.length?'<button class="pri" data-a="r">間違えた問題だけ再挑戦</button>':'')+'<button class="pri" data-a="n">新しいひっかけでもう一度</button><button data-a="h">最初に戻る</button>';
+  $.onclick=e=>{const a=e.target.dataset.a;if(a=="r")start(S.t,m);if(a=="n")start(S.t);if(a=="h")home()};
+}
+home();
+</script></body></html>
